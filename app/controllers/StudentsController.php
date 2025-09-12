@@ -18,7 +18,7 @@ class StudentsController extends Controller
     public function get_all()
     {
         $data = $this->StudentsModel->all();
-        $this->call->view('students/students_data', $data);
+        $this->call->view('students/index', $data);
     }
 
     public function create()
@@ -90,7 +90,7 @@ class StudentsController extends Controller
                 <div class='card'>
                     <h2>Success 🎉</h2>
                     <p>Student created successfully!</p>
-                    <a href='" . site_url('students/get-all') . "'>View Data</a>
+                    <a href='" . site_url('') . "'>View Data</a>
                 </div>
             </body>
             </html>
@@ -168,7 +168,7 @@ class StudentsController extends Controller
                 <div class='card'>
                     <h2>Success 🎉</h2>
                     <p>Student updated successfully!</p>
-                    <a href='" . site_url('students/get-all') . "'>View Data</a>
+                    <a href='" . site_url('') . "'>View Data</a>
                 </div>
             </body>
             </html>
@@ -237,7 +237,7 @@ class StudentsController extends Controller
             <div class='card'>
                 <h2>Deleted ✅</h2>
                 <p>Student deleted successfully!</p>
-                <a href='" . site_url('students/get-all') . "'>View Data</a>
+                <a href='" . site_url('') . "'>View Data</a>
             </div>
         </body>
         </html>
