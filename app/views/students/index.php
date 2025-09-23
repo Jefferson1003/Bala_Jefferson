@@ -99,7 +99,7 @@
         <?php if (!empty($students) && is_array($students)): ?>
         <?php foreach ($data as $student): ?>
             <tr>
-                <td><?= $student['id'] ?></td>
+
                 <td><?= $student['first_name'] ?></td>
                 <td><?= $student['last_name'] ?></td>
                 <td><?= $student['email'] ?></td>
