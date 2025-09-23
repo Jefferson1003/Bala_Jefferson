@@ -84,6 +84,10 @@
 
 <body>
     <h2>Students</h2>
+     <form method="get" class="search-form">
+            <input type="text" name="q" placeholder="Search..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">
+            <button type="submit">Search</button>
+        </form>
     <table>
         <tr>
             <th>ID</th>
@@ -92,7 +96,7 @@
             <th>Email</th>
             <th>Actions</th>
         </tr>
-
+        <?php if (!empty($students) && is_array($students)): ?>
         <?php foreach ($data as $student): ?>
             <tr>
                 <td><?= $student['id'] ?></td>
@@ -105,7 +109,15 @@
                 </td>
             </tr>
         <?php endforeach; ?>
+        <?php else: ?>
+                <tr><td colspan="5" style="text-align:center;">No records found.</td></tr>
+            <?php endif; ?>
+
     </table>
+    <!-- Pagination -->
+        <div class="pagination-wrapper">
+            <?= $page ?>
+        </div>
     <a href="<?= site_url('students/create') ?>" class="add-btn">➕ Add New Student</a>
 </body>
 

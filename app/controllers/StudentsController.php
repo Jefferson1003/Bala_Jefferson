@@ -15,14 +15,46 @@ class StudentsController extends Controller
         $this->call->model('StudentsModel');
     }
 
-    public function get_all()
+    public function index()
     {
-        $data = $this->StudentsModel->all();
-        $this->call->view('students/index', $data);
+        $page = isset($_GET['page']) && !empty($_GET['page']) ? $this->io->get('page') : 1;
+
+    // Search query
+    $q = isset($_GET['q']) && !empty($_GET['q']) ? trim($this->io->get('q')) : '';
+
+    $records_per_page = 10;
+
+    // Load pagination library
+    $this->call->library('pagination');
+
+    // Get paginated data
+    $students = $this->StudentsModel->page($q, $records_per_page, $page);
+
+    $data['students'] = $students['records'];
+
+    $total_rows = $students['total_rows'];
+
+    // Pagination settings
+    $this->pagination->set_options([
+        'first_link' => '⏮ First',
+        'last_link'  => 'Last ⏭',
+        'next_link'  => 'Next →',
+        'prev_link'  => '← Prev',
+        'page_delimiter' => '&page='
+    ]);
+
+    $this->pagination->set_theme('bootstrap');
+    $this->pagination->initialize($total_rows, $records_per_page, $page, 'students?q=' . $q);
+
+    $data['page'] = $this->pagination->paginate();
+
+    $this->call->view('students/index', $data);
+
     }
 
     public function create()
     {
+
         if ($this->io->method() == 'post') {
             $fname = $this->io->post('first_name');
             $lname = $this->io->post('last_name');
