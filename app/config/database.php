@@ -69,7 +69,7 @@ $database['main'] = array(
     // Optional for SQLite
     'path'      => ''
 
-   /* $database['main'] = array(
+    /*$database['main'] = array(
     'driver'	=> 'mysql',
     'hostname'	=> 'localhost',
     'port'		=> '3306',
