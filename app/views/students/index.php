@@ -168,17 +168,7 @@
 
     <a href="<?= site_url('students/create') ?>" class="add-btn">➕ Add New Student</a>
 
-    <!-- Pagination pill style -->
-    <div class="pagination-wrapper">
-        <!-- Example structure (ito auto-generate ni PHP mo via $page) -->
-        <a href="#" class="prev">Previous</a>
-        <a href="#">1</a>
-        <span class="active">2</span>
-        <a href="#">3</a>
-        <a href="#">...</a>
-        <a href="#">11</a>
-        <a href="#" class="next">Next</a>
-    </div>
+    <?php echo $page ?>
 </body>
 
 </html>

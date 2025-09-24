@@ -19,42 +19,79 @@ class StudentsController extends Controller
     {
         $page = isset($_GET['page']) && !empty($_GET['page']) ? $this->io->get('page') : 1;
 
-    // Search query
-    $q = isset($_GET['q']) && !empty($_GET['q']) ? trim($this->io->get('q')) : '';
+        // Search query
+        $q = isset($_GET['q']) && !empty($_GET['q']) ? trim($this->io->get('q')) : '';
 
-    $records_per_page = 10;
+        $records_per_page = 10;
 
-    // Load pagination library
-    $this->call->library('pagination');
+        // Load pagination library
+        $this->call->library('pagination');
 
-    // Get paginated data
-    $students = $this->StudentsModel->page($q, $records_per_page, $page);
+        // Get paginated data
+        $students = $this->StudentsModel->page($q, $records_per_page, $page);
 
-    $data['students'] = $students['records'];
+        $data['students'] = $students['records'];
 
-    $total_rows = $students['total_rows'];
+        $total_rows = $students['total_rows'];
 
-    // Pagination settings
-    $this->pagination->set_options([
-        'first_link' => '⏮ First',
-        'last_link'  => 'Last ⏭',
-        'next_link'  => 'Next →',
-        'prev_link'  => '← Prev',
-        'page_delimiter' => '&page='
-    ]);
+        // Pagination settings
+        $this->pagination->set_options([
+            'first_link' => '⏮ First',
+            'last_link'  => 'Last ⏭',
+            'next_link'  => 'Next →',
+            'prev_link'  => '← Prev',
+            'page_delimiter' => '&page='
+        ]);
 
-    $this->pagination->set_theme('bootstrap');
-    $this->pagination->initialize($total_rows, $records_per_page, $page, 'students?q=' . $q);
+        $this->pagination->set_theme('bootstrap');
+        $this->pagination->initialize($total_rows, $records_per_page, $page, '?q=' . $q);
 
-    $data['page'] = $this->pagination->paginate();
+        // Custom CSS for horizontal + centered pagination
+        $pagination_html = "
+        <style>
+            .pagination-wrapper {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .pagination {
+                display: flex;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                gap: 8px;
+            }
+            .pagination li {
+                display: inline-block;
+            }
+            .pagination li a,
+            .pagination li span {
+                display: block;
+                padding: 8px 14px;
+                border-radius: 6px;
+                background: #7e57c2;
+                color: #fff;
+                text-decoration: none;
+                transition: 0.3s;
+            }
+            .pagination li a:hover {
+                background: #5e35b1;
+            }
+            .pagination li.active span {
+                background: #5e35b1;
+            }
+        </style>
+        <div class='pagination-wrapper'>"
+        . $this->pagination->paginate()
+        . "</div>";
 
-    $this->call->view('students/index', $data);
+        $data['page'] = $pagination_html;
 
+        $this->call->view('students/index', $data);
     }
 
     public function create()
     {
-
         if ($this->io->method() == 'post') {
             $fname = $this->io->post('first_name');
             $lname = $this->io->post('last_name');
@@ -68,7 +105,6 @@ class StudentsController extends Controller
 
             $this->StudentsModel->insert($data);
 
-            
             echo "
             <!DOCTYPE html>
             <html lang='en'>
@@ -146,7 +182,6 @@ class StudentsController extends Controller
 
             $this->StudentsModel->update($id, $newdata);
 
-            
             echo "
             <!DOCTYPE html>
             <html lang='en'>
@@ -215,7 +250,6 @@ class StudentsController extends Controller
     {
         $this->StudentsModel->delete($id);
 
-        
         echo "
         <!DOCTYPE html>
         <html lang='en'>

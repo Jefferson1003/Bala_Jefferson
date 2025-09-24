@@ -80,7 +80,7 @@ $config['ENVIRONMENT']             = 'development';
 |
 */
 $config['base_url'] 				= 'https://bala-jefferson.onrender.com';
-/*$config['base_url'] 				= 'http://localhoast:3000/';*/
+//$config['base_url'] 				= '';
 
 /*
 |--------------------------------------------------------------------------
