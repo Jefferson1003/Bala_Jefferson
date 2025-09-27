@@ -162,6 +162,50 @@
         .logout-btn:hover {
             background: #b71c1c;
         }
+
+        /* Logout Modal Styles */
+        #logoutModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #logoutModal .modal-content {
+            background: #fff;
+            padding: 30px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+            min-width: 300px;
+            text-align: center;
+        }
+
+        #logoutModal h3 {
+            margin-top: 0;
+        }
+
+        #logoutModal .btn {
+            background: #e53935;
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        #logoutModal .btn.cancel {
+            background: #eee;
+            color: #333;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -170,8 +214,36 @@
         <span class="welcome-text">
             Welcome: <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>
         </span>
-        <a href="<?= site_url('/logout') ?>" class="logout-btn">Logout</a>
+        <a href="#" class="logout-btn" id="logoutBtn">Logout</a>
     </div>
+    <!-- Logout Modal -->
+    <div id="logoutModal">
+        <div class="modal-content">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to logout?</p>
+            <div style="margin-top:18px;">
+                <a href="<?= site_url('/logout') ?>" class="btn">Logout</a>
+                <button type="button" id="cancelLogout" class="btn cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutModal = document.getElementById('logoutModal');
+        const cancelLogout = document.getElementById('cancelLogout');
+        logoutBtn.onclick = function(e) {
+            e.preventDefault();
+            logoutModal.style.display = 'flex';
+        };
+        cancelLogout.onclick = function() {
+            logoutModal.style.display = 'none';
+        };
+        window.onclick = function(event) {
+            if (event.target === logoutModal) {
+                logoutModal.style.display = 'none';
+            }
+        };
+    </script>
     <h2>Students</h2>
     <form method="get" class="search-form" style="text-align:center; margin-bottom:20px;">
         <input type="text" name="q" placeholder="Search..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">
