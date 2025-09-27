@@ -47,3 +47,6 @@ $router->get('/', 'StudentsController::index');
 $router->match('students/create', 'StudentsController::create', ['GET', 'POST']);
 $router->match('students/update/{$id}', 'StudentsController::update', ['GET', 'POST']);
 $router->get('students/delete/{$id}', 'StudentsController::delete');
+$router->match('login', 'AuthController::login', ['GET', 'POST']);
+$router->match('register', 'AuthController::register', ['GET', 'POST']);
+$router->get('logout', 'AuthController::logout');
