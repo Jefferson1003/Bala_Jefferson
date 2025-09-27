@@ -79,8 +79,8 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= 'https://bala-jefferson.onrender.com';
-//$config['base_url'] 				= '';
+//$config['base_url'] 				= 'https://bala-jefferson.onrender.com';
+$config['base_url'] 				= '';
 
 /*
 |--------------------------------------------------------------------------
