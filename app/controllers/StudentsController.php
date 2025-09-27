@@ -50,7 +50,8 @@ class StudentsController extends Controller
         ]);
 
         $this->pagination->set_theme('bootstrap');
-        $this->pagination->initialize($total_rows, $records_per_page, $page, '?q=' . $q);
+        // Change '?q=' . $q to 'students/index/?q=' . $q
+        $this->pagination->initialize($total_rows, $records_per_page, $page, 'students/index/?q=' . $q);
 
         // Custom CSS for horizontal + centered pagination
         $pagination_html = "
@@ -164,7 +165,7 @@ class StudentsController extends Controller
                 <div class='card'>
                     <h2>Success 🎉</h2>
                     <p>Student created successfully!</p>
-                    <a href='" . site_url('') . "'>View Data</a>
+                    <a href='" . site_url('students/index') . "'>View Data</a>
                 </div>
             </body>
             </html>
@@ -241,7 +242,7 @@ class StudentsController extends Controller
                 <div class='card'>
                     <h2>Success 🎉</h2>
                     <p>Student updated successfully!</p>
-                    <a href='" . site_url('') . "'>View Data</a>
+                    <a href='" . site_url('students/index') . "'>View Data</a>
                 </div>
             </body>
             </html>
@@ -309,7 +310,7 @@ class StudentsController extends Controller
             <div class='card'>
                 <h2>Deleted ✅</h2>
                 <p>Student deleted successfully!</p>
-                <a href='" . site_url('') . "'>View Data</a>
+                <a href='" . site_url('students/index') . "'>View Data</a>
             </div>
         </body>
         </html>
