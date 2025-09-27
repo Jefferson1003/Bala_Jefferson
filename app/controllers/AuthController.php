@@ -21,7 +21,8 @@ class AuthController extends Controller
             if ($user && password_verify($password, $user['password'])) {
                 $this->session->set_userdata('user_id', $user['id']);
                 $this->session->set_userdata('username', $user['username']);
-                redirect(site_url('/dashboard'));
+                // Redirect to students index after login
+                redirect(site_url('students/index'));
             } else {
                 $data['error'] = 'Invalid username or password.';
                 $this->call->view('auth/login', $data);

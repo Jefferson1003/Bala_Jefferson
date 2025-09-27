@@ -17,6 +17,12 @@ class StudentsController extends Controller
 
     public function index()
     {
+        // Require login
+        if (!$this->session->userdata('user_id')) {
+            redirect(site_url('/login'));
+            return;
+        }
+
         $page = isset($_GET['page']) && !empty($_GET['page']) ? $this->io->get('page') : 1;
 
         // Search query
