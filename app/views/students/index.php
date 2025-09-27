@@ -130,10 +130,48 @@
             color: #fff;
             border-color: #7e57c2;
         }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #e53935;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
     </style>
 </head>
 
 <body>
+    <div class="top-bar">
+        <span class="welcome-text">
+            Welcome: <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>
+        </span>
+        <a href="<?= site_url('/logout') ?>" class="logout-btn">Logout</a>
+    </div>
     <h2>Students</h2>
     <form method="get" class="search-form" style="text-align:center; margin-bottom:20px;">
         <input type="text" name="q" placeholder="Search..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">

@@ -69,7 +69,7 @@ class AuthController extends Controller
     {
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('username');
-        $this->session->destroy();
+        $this->session->sess_destroy();
         redirect(site_url('/login'));
     }
 }
