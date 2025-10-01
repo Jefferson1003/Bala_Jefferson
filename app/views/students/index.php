@@ -1,284 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #e0f7fa, #e1bee7);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Students Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top left, #141e30, #243b55);
+      color: #fff;
+    }
 
-        table {
-            border-collapse: collapse;
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            overflow: hidden;
-        }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+    }
 
-        th,
-        td {
-            padding: 12px 15px;
-            text-align: left;
-        }
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
 
-        th {
-            background: #7e57c2;
-            color: white;
-        }
+    .dashboard-header h2 {
+      font-weight: 700;
+      color: #00f2fe;
+      text-shadow: 0 0 10px #00f2fe;
+    }
 
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
+    .logout-btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: #fff;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(255,65,108,0.6);
+    }
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+    }
 
-        tr:hover {
-            background: #ede7f6;
-        }
+    .user-status {
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #00f2fe;
+      margin-bottom: 20px;
+    }
+    .user-status.error {
+      background: rgba(255, 65, 108, 0.1);
+      border: 1px solid rgba(255, 65, 108, 0.3);
+      color: #ff416c;
+    }
 
-        a {
-            color: #7e57c2;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+    .table-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    }
 
-        a:hover {
-            color: #5e35b1;
-            text-decoration: underline;
-        }
+    table {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
 
-        .add-btn {
-            display: inline-block;
-            margin: 20px auto;
-            background: #7e57c2;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
-        }
+    th {
+      background: #00f2fe;
+      color: #000;
+      font-size: 14px;
+      text-transform: uppercase;
+      text-align: center;
+    }
 
-        .add-btn:hover {
-            background: #5e35b1;
-        }
+    td {
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      text-align: center;
+    }
 
-        /* 🔥 Modern Pagination (pill style) */
-        .pagination-wrapper {
-            margin-top: auto;
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
+    a.btn-action {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin: 0 2px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: 0.3s;
+    }
 
-        .pagination-wrapper a,
-        .pagination-wrapper span {
-            display: inline-block;
-            padding: 10px 18px;
-            border-radius: 50px; /* pill shape */
-            font-size: 15px;
-            font-weight: 500;
-            color: #333;
-            background: #f1f1f1;
-            border: none;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            min-width: 40px;
-            text-align: center;
-        }
+    a.btn-update {
+      background: linear-gradient(90deg, #00f2fe, #4facfe);
+      box-shadow: 0 0 10px rgba(0,242,254,0.5);
+    }
+    a.btn-update:hover {
+      box-shadow: 0 0 20px rgba(79,172,254,0.8);
+    }
 
-        .pagination-wrapper a:hover {
-            background: #7e57c2;
-            color: #fff;
-        }
+    a.btn-delete {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      box-shadow: 0 0 10px rgba(255,65,108,0.5);
+    }
+    a.btn-delete:hover {
+      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+    }
 
-        .pagination-wrapper .active {
-            background: #000;
-            color: #fff !important;
-            font-weight: bold;
-        }
+    .btn-create {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      background: linear-gradient(90deg, #00f2fe, #4facfe);
+      color: #000;
+      font-size: 1.1em;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: 0.3s;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(0,242,254,0.6);
+    }
+    .btn-create:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(79,172,254,0.8);
+    }
 
-        .pagination-wrapper .prev,
-        .pagination-wrapper .next {
-            background: #fff;
-            border: 1px solid #ccc;
-            font-weight: 600;
-        }
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-        .pagination-wrapper .prev:hover,
-        .pagination-wrapper .next:hover {
-            background: #7e57c2;
-            color: #fff;
-            border-color: #7e57c2;
-        }
+    .search-form input {
+      border-radius: 8px;
+      border: 1px solid rgba(0,242,254,0.4);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .search-form input:focus {
+      outline: none;
+      border: 1px solid #00f2fe;
+      box-shadow: 0 0 10px #00f2fe;
+      background: rgba(255,255,255,0.15);
+    }
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-        }
-
-        .welcome-text {
-            font-size: 18px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .logout-btn {
-            background: #e53935;
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #b71c1c;
-        }
-
-        /* Logout Modal Styles */
-        #logoutModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 999;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #logoutModal .modal-content {
-            background: #fff;
-            padding: 30px 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-            min-width: 300px;
-            text-align: center;
-        }
-
-        #logoutModal h3 {
-            margin-top: 0;
-        }
-
-        #logoutModal .btn {
-            background: #e53935;
-            color: #fff;
-            padding: 8px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-right: 10px;
-        }
-
-        #logoutModal .btn.cancel {
-            background: #eee;
-            color: #333;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+    .search-form button {
+      background: #00f2fe;
+      border: none;
+      color: #000;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+    .search-form button:hover {
+      box-shadow: 0 0 15px #00f2fe;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="top-bar">
-        <span class="welcome-text">
-            Welcome: <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>
-        </span>
-        <a href="#" class="logout-btn" id="logoutBtn">Logout</a>
+  <div class="dashboard-container">
+    
+    <div class="dashboard-header">
+      <h2>
+        <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
+      </h2>
+      <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
     </div>
-    <!-- Logout Modal -->
-    <div id="logoutModal">
-        <div class="modal-content">
-            <h3>Confirm Logout</h3>
-            <p>Are you sure you want to logout?</p>
-            <div style="margin-top:18px;">
-                <a href="<?= site_url('/logout') ?>" class="btn">Logout</a>
-                <button type="button" id="cancelLogout" class="btn cancel">Cancel</button>
-            </div>
-        </div>
-    </div>
-    <script>
-        const logoutBtn = document.getElementById('logoutBtn');
-        const logoutModal = document.getElementById('logoutModal');
-        const cancelLogout = document.getElementById('cancelLogout');
-        logoutBtn.onclick = function(e) {
-            e.preventDefault();
-            logoutModal.style.display = 'flex';
-        };
-        cancelLogout.onclick = function() {
-            logoutModal.style.display = 'none';
-        };
-        window.onclick = function(event) {
-            if (event.target === logoutModal) {
-                logoutModal.style.display = 'none';
-            }
-        };
-    </script>
-    <h2>Students</h2>
-    <form method="get" class="search-form" style="text-align:center; margin-bottom:20px;">
-        <input type="text" name="q" placeholder="Search..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">
+
+    <?php if(!empty($logged_in_user)): ?>
+      <div class="user-status mb-3">
+        <strong>Welcome:</strong> <?= html_escape($logged_in_user['username']); ?>
+      </div>
+    <?php else: ?>
+      <div class="user-status error mb-3">
+        Logged in user not found
+      </div>
+    <?php endif; ?>
+
+    <!-- Search + Table -->
+    <div class="table-card">
+      <form action="<?=site_url('users');?>" method="get" class="d-flex mb-3 search-form">
+        <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+        <input name="q" type="text" class="form-control me-2" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit">Search</button>
-    </form>
+      </form>
 
-    <table>
-        <tr>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <tr>
             <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Email</th>
-            <th>Actions</th>
-        </tr>
-        <?php if (!empty($students) && is_array($students)): ?>
-        <?php foreach ($students as $student):?>
-            <tr>
-                <td><?= $student['id'] ?></td>
-                <td><?= $student['first_name'] ?></td>
-                <td><?= $student['last_name'] ?></td>
-                <td><?= $student['email'] ?></td>
-                <td>
-                    <a href="<?= site_url('students/update/') . $student['id'] ?>">Update</a> |
-                    <a href="<?= site_url('students/delete/') . $student['id'] ?>">Delete</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        <?php else: ?>
-            <tr><td colspan="5" style="text-align:center;">No records found.</td></tr>
-        <?php endif; ?>
-    </table>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <th>Password</th>
+              <th>Role</th>
+            <?php endif; ?>
+            <th>Action</th>
+          </tr>
+          <?php foreach ($user as $user): ?>
+          <tr>
+            <td><?=html_escape($user['id']); ?></td>
+            <td><?=html_escape($user['username']); ?></td>
+            <td><?=html_escape($user['email']); ?></td>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <td>*******</td>
+              <td><?= html_escape($user['role']); ?></td>
+            <?php endif; ?>
+            <td>
+              <a href="<?=site_url('/users/update/'.$user['id']);?>" class="btn-action btn-update">Update</a>
+              <a href="<?=site_url('/users/delete/'.$user['id']);?>" class="btn-action btn-delete">Delete</a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </table>
+      </div>
 
-    <a href="<?= site_url('students/create') ?>" class="add-btn">➕ Add New Student</a>
+      <div class="pagination-container">
+        <?php echo $page; ?>
+      </div>
+    </div>
 
-    <?php echo $page ?>
+    <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
+  </div>
 </body>
-
 </html>
