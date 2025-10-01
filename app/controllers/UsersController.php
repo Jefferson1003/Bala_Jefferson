@@ -3,11 +3,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 /**
  * Controller: UsersController
- * 
- * Automatically generated via CLI.
  */
 
-    class UsersController extends Controller {
+ class UsersController extends Controller {
         public function __construct()
         {
             parent::__construct();
@@ -153,17 +151,15 @@ public function update($id)
 
     public function register()
     {
-        $this->call->model('UsersModel'); // load model
-
         if ($this->io->method() == 'post') {
             $username = $this->io->post('username');
             $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
 
             $data = [
-                'username' => $username,
-                'email'    => $this->io->post('email'),
-                'password' => $password,
-                'role'     => $this->io->post('role'),
+                'username'   => $username,
+                'email'      => $this->io->post('email'),
+                'password'   => $password,
+                'role'       => $this->io->post('role'),
                 'created_at' => date('Y-m-d H:i:s')
             ];
 
@@ -175,70 +171,41 @@ public function update($id)
         $this->call->view('/auth/register');
     }
 
+    public function login()
+    {
+        $error = null;
 
-        public function login()
-        {
-            $this->call->library('auth');
+        if ($this->io->method() == 'post') {
+            $username = $this->io->post('username');
+            $password = $this->io->post('password');
 
-            $error = null; // prepare error variable
+            $user = $this->UsersModel->get_user_by_username($username);
 
-            if ($this->io->method() == 'post') {
-                $username = $this->io->post('username');
-                $password = $this->io->post('password');
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user'] = [
+                    'id'       => $user['id'],
+                    'username' => $user['username'],
+                    'role'     => $user['role']
+                ];
 
-                $this->call->model('UsersModel');
-                $user = $this->UsersModel->get_user_by_username($username);
-
-                if ($user) {
-                    if ($this->auth->login($username, $password)) {
-                        // Set session
-                        $_SESSION['user'] = [
-                            'id'       => $user['id'],
-                            'username' => $user['username'],
-                            'role'     => $user['role']
-                        ];
-
-                        if ($user['role'] == 'admin') {
-                            redirect('/users');
-                        } else {
-                            redirect('/users');
-                        }
-                    } else {
-                        $error = "Incorrect password!";
-                    }
-                } else {
-                    $error = "Username not found!";
-                }
+                redirect('/users');
+            } else {
+                $error = "Invalid username or password!";
             }
-
-            // Pass error to view
-            $this->call->view('auth/login', ['error' => $error]);
         }
 
-
+        $this->call->view('auth/login', ['error' => $error]);
+    }
 
     public function dashboard()
     {
-        $this->call->model('UsersModel');
-        $data['user'] = $this->UsersModel->get_all_users(); // fetch all users
-
-        $this->call->model('UsersModel');
-
-        $page = 1;
-        if(isset($_GET['page']) && ! empty($_GET['page'])) {
-            $page = $this->io->get('page');
-        }
-
-        $q = '';
-        if(isset($_GET['q']) && ! empty($_GET['q'])) {
-            $q = trim($this->io->get('q'));
-        }
-
+        $page = !empty($this->io->get('page')) ? $this->io->get('page') : 1;
+        $q    = !empty($this->io->get('q')) ? trim($this->io->get('q')) : '';
         $records_per_page = 10;
 
         $user = $this->UsersModel->page($q, $records_per_page, $page);
         $data['user'] = $user['records'];
-        $total_rows = $user['total_rows'];
+        $total_rows   = $user['total_rows'];
 
         $this->pagination->set_options([
             'first_link'     => '⏮ First',
@@ -254,12 +221,9 @@ public function update($id)
         $this->call->view('user/dashboard', $data);
     }
 
-
     public function logout()
     {
-        $this->call->library('auth');
-        $this->auth->logout();
+        unset($_SESSION['user']); // clear session manually
         redirect('auth/login');
     }
-
 }
