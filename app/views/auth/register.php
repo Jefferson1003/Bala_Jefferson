@@ -19,69 +19,72 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0d0d1a, #1a1a40, #0d7377);
+      background: #0f0f1a;
       overflow: hidden;
     }
 
-    /* Floating gradient orbs */
+    /* Animated background circles */
     .circles {
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 0;
       overflow: hidden;
+      z-index: 0;
     }
 
     .circles li {
       position: absolute;
       display: block;
       list-style: none;
-      width: 30px;
-      height: 30px;
-      background: linear-gradient(135deg, rgba(0,255,163,0.3), rgba(0,229,255,0.2));
-      animation: animate 25s linear infinite;
+      width: 25px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      animation: animate 20s linear infinite;
       bottom: -150px;
       border-radius: 50%;
     }
 
-    .circles li:nth-child(1) { left: 15%; width: 80px; height: 80px; animation-duration: 18s; }
-    .circles li:nth-child(2) { left: 60%; width: 20px; height: 20px; animation-duration: 12s; }
-    .circles li:nth-child(3) { left: 70%; width: 100px; height: 100px; animation-duration: 22s; }
-    .circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 16s; }
-    .circles li:nth-child(5) { left: 80%; width: 150px; height: 150px; animation-duration: 30s; }
+    .circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-duration: 15s; }
+    .circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-duration: 10s; }
+    .circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-duration: 20s; }
+    .circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 18s; }
+    .circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-duration: 12s; }
+    .circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-duration: 25s; }
+    .circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-duration: 35s; }
+    .circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-duration: 45s; }
+    .circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-duration: 11s; }
+    .circles li:nth-child(10){ left: 85%; width: 150px; height: 150px; animation-duration: 30s; }
 
     @keyframes animate {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 30%; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
       100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
     }
 
-    /* Register Card */
+    /* Register Card (same as Login Card style) */
     .register {
       position: relative;
       width: 420px;
       padding: 40px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 20px;
-      backdrop-filter: blur(25px);
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3),
-                  0 0 40px rgba(0, 255, 163, 0.25);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
       z-index: 1;
     }
 
     .register h2 {
       text-align: center;
-      font-size: 2.2em;
-      font-weight: 700;
+      font-size: 2em;
+      font-weight: 600;
       margin-bottom: 25px;
-      color: #00ffa3;
-      text-shadow: 0 0 15px #00e5ff, 0 0 30px #00ffa3;
-      letter-spacing: 1px;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ff;
     }
 
     .inputBox {
       position: relative;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .inputBox input,
@@ -91,16 +94,9 @@
       font-size: 1em;
       color: #fff;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: none;
       outline: none;
-      border-radius: 12px;
-      transition: 0.3s;
-    }
-
-    .inputBox input:focus,
-    .inputBox select:focus {
-      border-color: #00ffa3;
-      box-shadow: 0 0 12px #00e5ff;
+      border-radius: 10px;
     }
 
     .inputBox input::placeholder {
@@ -114,11 +110,6 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #00ffa3;
-      transition: 0.3s;
-    }
-
-    .toggle-password:hover {
       color: #00e5ff;
     }
 
@@ -126,44 +117,41 @@
       width: 100%;
       padding: 14px;
       border: none;
-      background: linear-gradient(90deg, #00ffa3, #00e5ff);
+      background: linear-gradient(90deg, #00e5ff, #00ffa3);
       color: #0f0f1a;
-      font-size: 1.15em;
+      font-size: 1.1em;
       font-weight: 600;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
       text-transform: uppercase;
-      box-shadow: 0 0 15px rgba(0,255,163,0.4);
     }
 
     .register button:hover {
-      opacity: 0.9;
-      transform: scale(1.03);
-      box-shadow: 0 0 20px #00e5ff, 0 0 25px #00ffa3;
+      opacity: 0.8;
+      box-shadow: 0 0 15px #00ffa3;
     }
 
     .group {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .group a {
       font-size: 0.95em;
       color: #00e5ff;
       text-decoration: none;
-      transition: 0.3s;
     }
 
     .group a:hover {
       text-decoration: underline;
-      color: #00ffa3;
     }
   </style>
 </head>
 <body>
-  <!-- Background floating orbs -->
+  <!-- Background circles -->
   <ul class="circles">
+    <li></li><li></li><li></li><li></li><li></li>
     <li></li><li></li><li></li><li></li><li></li>
   </ul>
 
