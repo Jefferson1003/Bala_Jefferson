@@ -7,16 +7,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body {
+    * {
       font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at top left, #141e30, #243b55);
-      color: #fff;
+    }
+
+    body {
+      background: linear-gradient(135deg, #80d0ff, #4fa3f7);
+      min-height: 100vh;
+      padding: 30px;
     }
 
     .dashboard-container {
       max-width: 1200px;
-      margin: 50px auto;
-      padding: 20px;
+      margin: auto;
     }
 
     .dashboard-header {
@@ -28,66 +31,56 @@
 
     .dashboard-header h2 {
       font-weight: 700;
-      color: #00f2fe;
-      text-shadow: 0 0 10px #00f2fe;
+      color: #333;
     }
 
     .logout-btn {
       padding: 10px 18px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       color: #fff;
       font-weight: 600;
       transition: 0.3s;
-      box-shadow: 0 0 10px rgba(255,65,108,0.6);
     }
     .logout-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+      opacity: 0.9;
     }
 
     .user-status {
       padding: 12px 18px;
       border-radius: 10px;
       font-size: 14px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      color: #00f2fe;
+      background: rgba(79, 163, 247, 0.1);
+      border: 1px solid rgba(79, 163, 247, 0.4);
+      color: #333;
       margin-bottom: 20px;
     }
     .user-status.error {
       background: rgba(255, 65, 108, 0.1);
-      border: 1px solid rgba(255, 65, 108, 0.3);
+      border: 1px solid rgba(255, 65, 108, 0.4);
       color: #ff416c;
     }
 
     .table-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
+      background: #fff;
       border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    }
-
-    table {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     th {
-      background: #00f2fe;
-      color: #000;
+      background: #4fa3f7;
+      color: #fff;
       font-size: 14px;
       text-transform: uppercase;
       text-align: center;
     }
 
     td {
-      background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: #fff;
+      background: #f9f9f9;
+      border-bottom: 1px solid #eee;
+      color: #333;
       text-align: center;
     }
 
@@ -103,37 +96,33 @@
     }
 
     a.btn-update {
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      box-shadow: 0 0 10px rgba(0,242,254,0.5);
+      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
     }
     a.btn-update:hover {
-      box-shadow: 0 0 20px rgba(79,172,254,0.8);
+      opacity: 0.9;
     }
 
     a.btn-delete {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      box-shadow: 0 0 10px rgba(255,65,108,0.5);
     }
     a.btn-delete:hover {
-      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+      opacity: 0.9;
     }
 
     .btn-create {
       width: 100%;
       padding: 14px;
       border: none;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      color: #000;
+      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      color: #fff;
       font-size: 1.1em;
       border-radius: 10px;
       font-weight: 600;
       transition: 0.3s;
       margin-top: 20px;
-      box-shadow: 0 0 15px rgba(0,242,254,0.6);
     }
     .btn-create:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(79,172,254,0.8);
+      opacity: 0.9;
     }
 
     .pagination-container {
@@ -144,27 +133,27 @@
 
     .search-form input {
       border-radius: 8px;
-      border: 1px solid rgba(0,242,254,0.4);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
     }
     .search-form input:focus {
       outline: none;
-      border: 1px solid #00f2fe;
-      box-shadow: 0 0 10px #00f2fe;
-      background: rgba(255,255,255,0.15);
+      border: 1px solid #4fa3f7;
+      box-shadow: 0 0 10px rgba(79, 163, 247, 0.4);
+      background: #fff;
     }
 
     .search-form button {
-      background: #00f2fe;
+      background: #4fa3f7;
       border: none;
-      color: #000;
+      color: #fff;
       font-weight: 600;
       border-radius: 8px;
       padding: 8px 16px;
     }
     .search-form button:hover {
-      box-shadow: 0 0 15px #00f2fe;
+      opacity: 0.9;
     }
   </style>
 </head>
