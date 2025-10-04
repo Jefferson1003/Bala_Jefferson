@@ -12,26 +12,66 @@
     }
 
     body {
-      background: linear-gradient(135deg, #80d0ff, #4fa3f7);
-      min-height: 100vh;
+      margin: 0;
       padding: 30px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #141e30, #243b55); /* dark gradient */
+    }
+
+    /* BUBBLES BACKGROUND */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .bubbles span {
+      position: absolute;
+      bottom: -150px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+    }
+    .bubbles span:nth-child(1){ left:10%; width:60px; height:60px; animation-duration:25s; }
+    .bubbles span:nth-child(2){ left:20%; animation-duration:18s; animation-delay:2s;}
+    .bubbles span:nth-child(3){ left:25%; width:80px; height:80px; animation-duration:22s; }
+    .bubbles span:nth-child(4){ left:40%; animation-duration:20s; animation-delay:3s;}
+    .bubbles span:nth-child(5){ left:55%; width:50px; height:50px; animation-duration:17s;}
+    .bubbles span:nth-child(6){ left:70%; width:90px; height:90px; animation-duration:30s;}
+    .bubbles span:nth-child(7){ left:80%; animation-duration:19s; animation-delay:4s;}
+    .bubbles span:nth-child(8){ left:90%; width:70px; height:70px; animation-duration:26s;}
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
     }
 
     .dashboard-container {
       max-width: 1200px;
       margin: auto;
+      position: relative;
+      z-index: 1;
     }
 
     /* HEADER */
     .dashboard-header {
-      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
       color: #fff;
       padding: 18px 25px;
       border-radius: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       margin-bottom: 30px;
     }
 
@@ -60,34 +100,30 @@
       padding: 12px 18px;
       border-radius: 12px;
       font-size: 14px;
-      background: #fff;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(6px);
       border-left: 5px solid #4fa3f7;
-      color: #333;
+      color: #fff;
       margin-bottom: 20px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
     }
     .user-status.error {
       border-left: 5px solid #ff416c;
-      color: #ff416c;
-      background: #fff;
+      color: #ffb3c1;
+      background: rgba(255,255,255,0.15);
     }
 
     /* TABLE CARD */
     .table-card {
-      background: #fff;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
       border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-
-    table {
-      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
       overflow: hidden;
     }
 
     th {
-      background: #4fa3f7;
+      background: rgba(79,163,247,0.9);
       color: #fff;
       font-size: 14px;
       text-transform: uppercase;
@@ -96,9 +132,9 @@
     }
 
     td {
-      background: #fdfdfd;
-      border-bottom: 1px solid #eee;
-      color: #333;
+      background: rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
       text-align: center;
       vertical-align: middle;
       padding: 12px;
@@ -106,7 +142,7 @@
     }
 
     tr:hover td {
-      background: #f1f7ff;
+      background: rgba(255,255,255,0.2);
     }
 
     /* BUTTONS */
@@ -158,13 +194,6 @@
       box-shadow: 0 8px 20px rgba(79,163,247,0.7);
     }
 
-    /* PAGINATION */
-    .pagination-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
     /* SEARCH */
     .search-form {
       display: flex;
@@ -175,16 +204,16 @@
     .search-form input {
       flex: 1;
       border-radius: 8px;
-      border: 1px solid #ddd;
-      background: #f9f9f9;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1);
       padding: 10px 15px;
-      color: #333;
+      color: #fff;
       transition: 0.2s;
     }
     .search-form input:focus {
       border: 1px solid #4fa3f7;
-      box-shadow: 0 0 8px rgba(79,163,247,0.4);
-      background: #fff;
+      box-shadow: 0 0 8px rgba(79,163,247,0.6);
+      background: rgba(255,255,255,0.2);
     }
 
     .search-form button {
@@ -202,6 +231,12 @@
   </style>
 </head>
 <body>
+  <!-- Animated Background Bubbles -->
+  <div class="bubbles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="dashboard-container">
     
     <div class="dashboard-header">
@@ -225,7 +260,7 @@
     <div class="table-card">
       <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-        <input name="q" type="text" class="form-control" placeholder="Search" value="<?=html_escape($q);?>">
+        <input name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit">Search</button>
       </form>
 
