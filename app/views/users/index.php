@@ -17,7 +17,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      background: linear-gradient(135deg, #141e30, #243b55); /* dark gradient */
+      background: linear-gradient(135deg, #141e30, #243b55);
     }
 
     /* BUBBLES BACKGROUND */
@@ -90,6 +90,7 @@
       transition: 0.3s;
       box-shadow: 0 4px 12px rgba(255,65,108,0.4);
     }
+
     .logout-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(255,65,108,0.6);
@@ -162,6 +163,7 @@
       background: linear-gradient(90deg, #4fa3f7, #80d0ff);
       box-shadow: 0 3px 8px rgba(79,163,247,0.4);
     }
+
     a.btn-update:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 14px rgba(79,163,247,0.6);
@@ -171,6 +173,7 @@
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       box-shadow: 0 3px 8px rgba(255,65,108,0.4);
     }
+
     a.btn-delete:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 14px rgba(255,65,108,0.6);
@@ -189,6 +192,7 @@
       margin-top: 25px;
       box-shadow: 0 5px 15px rgba(79,163,247,0.5);
     }
+
     .btn-create:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(79,163,247,0.7);
@@ -210,6 +214,7 @@
       color: #fff;
       transition: 0.2s;
     }
+
     .search-form input:focus {
       border: 1px solid #4fa3f7;
       box-shadow: 0 0 8px rgba(79,163,247,0.6);
@@ -225,6 +230,7 @@
       padding: 8px 16px;
       transition: 0.2s;
     }
+
     .search-form button:hover {
       background: #3a8de0;
     }
@@ -238,12 +244,14 @@
   </div>
 
   <div class="dashboard-container">
-    
     <div class="dashboard-header">
       <h2>
         <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
       </h2>
-      <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
+      <!-- Logout with confirmation -->
+      <a href="<?=site_url('auth/logout');?>" onclick="return confirm('Are you sure you want to logout?');">
+        <button class="logout-btn">Logout</button>
+      </a>
     </div>
 
     <?php if(!empty($logged_in_user)): ?>
