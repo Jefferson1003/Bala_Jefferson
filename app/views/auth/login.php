@@ -19,7 +19,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: #0f0f1a;
+      background: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e);
       overflow: hidden;
     }
 
@@ -38,7 +38,9 @@
       list-style: none;
       width: 25px;
       height: 25px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 255, 200, 0.15);
+      border: 1px solid rgba(0, 255, 200, 0.3);
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
       animation: animate 20s linear infinite;
       bottom: -150px;
       border-radius: 50%;
@@ -65,21 +67,28 @@
       position: relative;
       width: 380px;
       padding: 50px 40px;
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      border-radius: 25px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 35px rgba(0, 255, 200, 0.5);
       z-index: 1;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .login h2 {
       text-align: center;
-      font-size: 2em;
-      font-weight: 600;
-      margin-bottom: 25px;
-      color: #00e5ff;
-      text-shadow: 0 0 10px #00e5ff;
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #00ffe5;
+      text-shadow: 0 0 20px #00ffe5, 0 0 30px #00ffa3;
+      letter-spacing: 2px;
     }
 
     .inputBox {
@@ -89,13 +98,18 @@
 
     .inputBox input {
       width: 100%;
-      padding: 14px 45px 14px 15px;
+      padding: 14px 50px 14px 15px;
       font-size: 1em;
       color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      outline: none;
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+
+    .inputBox input:focus {
+      border: 1px solid #00ffa3;
+      box-shadow: 0 0 10px #00ffa3;
     }
 
     .inputBox input::placeholder {
@@ -110,40 +124,48 @@
       cursor: pointer;
       font-size: 1.1em;
       color: #00e5ff;
+      transition: 0.3s;
+    }
+
+    .toggle-password:hover {
+      color: #00ffa3;
+      text-shadow: 0 0 10px #00ffa3;
     }
 
     .login button {
       width: 100%;
       padding: 14px;
       border: none;
-      background: linear-gradient(90deg, #00e5ff, #00ffa3);
+      background: linear-gradient(135deg, #00ffa3, #00e5ff, #0077ff);
       color: #0f0f1a;
-      font-size: 1.1em;
-      font-weight: 600;
-      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: 700;
+      border-radius: 12px;
       cursor: pointer;
-      transition: 0.3s;
-      text-transform: uppercase;
+      transition: 0.4s;
+      letter-spacing: 1px;
     }
 
     .login button:hover {
-      opacity: 0.8;
-      box-shadow: 0 0 15px #00ffa3;
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px #00ffa3, 0 0 40px #00e5ff;
     }
 
     .group {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     .group a {
       font-size: 0.95em;
       color: #00e5ff;
       text-decoration: none;
+      transition: 0.3s;
     }
 
     .group a:hover {
-      text-decoration: underline;
+      color: #00ffa3;
+      text-shadow: 0 0 10px #00ffa3;
     }
 
   </style>
