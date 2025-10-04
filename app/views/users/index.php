@@ -15,64 +15,49 @@
       margin: 0;
       padding: 30px;
       min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      background: linear-gradient(135deg, #141e30, #243b55); /* dark gradient */
+      background: linear-gradient(135deg, #80d0ff, #4fa3f7);
+      overflow: hidden;
     }
 
-    /* BUBBLES BACKGROUND */
+    /* Animated bubbles */
     .bubbles {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
       overflow: hidden;
     }
-    .bubbles span {
+    .bubble {
       position: absolute;
-      bottom: -150px;
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.1);
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.25);
       border-radius: 50%;
       animation: rise 20s infinite ease-in;
     }
-    .bubbles span:nth-child(1){ left:10%; width:60px; height:60px; animation-duration:25s; }
-    .bubbles span:nth-child(2){ left:20%; animation-duration:18s; animation-delay:2s;}
-    .bubbles span:nth-child(3){ left:25%; width:80px; height:80px; animation-duration:22s; }
-    .bubbles span:nth-child(4){ left:40%; animation-duration:20s; animation-delay:3s;}
-    .bubbles span:nth-child(5){ left:55%; width:50px; height:50px; animation-duration:17s;}
-    .bubbles span:nth-child(6){ left:70%; width:90px; height:90px; animation-duration:30s;}
-    .bubbles span:nth-child(7){ left:80%; animation-duration:19s; animation-delay:4s;}
-    .bubbles span:nth-child(8){ left:90%; width:70px; height:70px; animation-duration:26s;}
-
     @keyframes rise {
       0% { transform: translateY(0) scale(1); opacity: 0.5; }
-      50% { opacity: 0.8; }
+      50% { opacity: 0.3; }
       100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
     }
 
+    /* Dashboard container */
     .dashboard-container {
       max-width: 1200px;
       margin: auto;
-      position: relative;
-      z-index: 1;
     }
 
     /* HEADER */
     .dashboard-header {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      color: #fff;
+      background: #fff;
+      color: #333;
       padding: 18px 25px;
       border-radius: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      margin-bottom: 25px;
     }
 
     .dashboard-header h2 {
@@ -100,30 +85,33 @@
       padding: 12px 18px;
       border-radius: 12px;
       font-size: 14px;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(6px);
+      background: #fff;
       border-left: 5px solid #4fa3f7;
-      color: #fff;
+      color: #333;
       margin-bottom: 20px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
     }
     .user-status.error {
       border-left: 5px solid #ff416c;
-      color: #ffb3c1;
-      background: rgba(255,255,255,0.15);
+      color: #ff416c;
     }
 
     /* TABLE CARD */
     .table-card {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
+      background: #fff;
       border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    table {
+      border-radius: 12px;
       overflow: hidden;
     }
 
     th {
-      background: rgba(79,163,247,0.9);
+      background: #4fa3f7;
       color: #fff;
       font-size: 14px;
       text-transform: uppercase;
@@ -132,17 +120,16 @@
     }
 
     td {
-      background: rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
+      background: #fdfdfd;
+      border-bottom: 1px solid #eee;
+      color: #333;
       text-align: center;
       vertical-align: middle;
       padding: 12px;
-      transition: 0.2s;
     }
 
     tr:hover td {
-      background: rgba(255,255,255,0.2);
+      background: #f1f7ff;
     }
 
     /* BUTTONS */
@@ -204,16 +191,15 @@
     .search-form input {
       flex: 1;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.1);
+      border: 1px solid #ddd;
+      background: #f9f9f9;
       padding: 10px 15px;
-      color: #fff;
-      transition: 0.2s;
+      color: #333;
     }
     .search-form input:focus {
       border: 1px solid #4fa3f7;
-      box-shadow: 0 0 8px rgba(79,163,247,0.6);
-      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 8px rgba(79,163,247,0.4);
+      background: #fff;
     }
 
     .search-form button {
@@ -228,17 +214,26 @@
     .search-form button:hover {
       background: #3a8de0;
     }
+
+    /* PAGINATION */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <!-- Animated Background Bubbles -->
+  <!-- animated bubbles -->
   <div class="bubbles">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
+    <div class="bubble" style="width:40px; height:40px; left:10%; animation-duration:18s;"></div>
+    <div class="bubble" style="width:25px; height:25px; left:30%; animation-duration:12s;"></div>
+    <div class="bubble" style="width:50px; height:50px; left:50%; animation-duration:20s;"></div>
+    <div class="bubble" style="width:35px; height:35px; left:70%; animation-duration:15s;"></div>
+    <div class="bubble" style="width:60px; height:60px; left:90%; animation-duration:22s;"></div>
   </div>
 
   <div class="dashboard-container">
-    
     <div class="dashboard-header">
       <h2>
         <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
@@ -260,7 +255,7 @@
     <div class="table-card">
       <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-        <input name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <input name="q" type="text" class="form-control" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit">Search</button>
       </form>
 
