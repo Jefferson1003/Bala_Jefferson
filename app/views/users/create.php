@@ -16,110 +16,115 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
       overflow: hidden;
     }
 
-    /* Animated background glow */
-    body::before {
-      content: '';
+    /* Floating circles background */
+    .circles {
       position: absolute;
-      width: 400px;
-      height: 400px;
-      background: #00f2fe;
-      border-radius: 50%;
-      filter: blur(200px);
-      top: -100px;
-      left: -100px;
-      animation: float1 10s infinite alternate ease-in-out;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
     }
 
-    body::after {
-      content: '';
+    .circles li {
       position: absolute;
-      width: 500px;
-      height: 500px;
-      background: #4facfe;
-      border-radius: 50%;
-      filter: blur(220px);
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      animation: float 25s linear infinite;
       bottom: -150px;
-      right: -150px;
-      animation: float2 12s infinite alternate ease-in-out;
+      border-radius: 50%;
     }
 
-    @keyframes float1 {
-      from { transform: translateY(0); }
-      to { transform: translateY(60px); }
+    .circles li:nth-child(1) { left: 25%; width: 60px; height: 60px; animation-duration: 15s; }
+    .circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-duration: 10s; }
+    .circles li:nth-child(3) { left: 70%; width: 25px; height: 25px; animation-duration: 20s; }
+    .circles li:nth-child(4) { left: 40%; width: 50px; height: 50px; animation-duration: 18s; }
+    .circles li:nth-child(5) { left: 65%; width: 30px; height: 30px; animation-duration: 12s; }
+    .circles li:nth-child(6) { left: 75%; width: 90px; height: 90px; animation-duration: 25s; }
+    .circles li:nth-child(7) { left: 35%; width: 120px; height: 120px; animation-duration: 35s; }
+    .circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-duration: 40s; }
+    .circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-duration: 11s; }
+    .circles li:nth-child(10){ left: 85%; width: 140px; height: 140px; animation-duration: 30s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
     }
 
-    @keyframes float2 {
-      from { transform: translateY(0); }
-      to { transform: translateY(-60px); }
-    }
-
+    /* Form Card */
     .form-container {
       position: relative;
       width: 380px;
       padding: 40px;
-      border-radius: 15px;
-      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3),
-                  0 0 40px rgba(79, 172, 254, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
       z-index: 1;
+      animation: slideUp 0.7s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .form-container h1 {
       text-align: center;
       font-size: 2em;
       font-weight: 700;
-      color: #00f2fe;
+      color: #fff;
       margin-bottom: 25px;
-      text-shadow: 0 0 10px #00f2fe;
     }
 
     .form-group input {
       width: 100%;
-      padding: 12px 15px;
+      padding: 14px 15px;
       font-size: 1em;
-      border-radius: 8px;
-      border: 2px solid transparent;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.25);
       margin-bottom: 18px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.12);
       color: #fff;
       transition: 0.3s;
     }
 
     .form-group input::placeholder {
-      color: #aaa;
+      color: #bbb;
     }
 
     .form-group input:focus {
       outline: none;
-      border-color: #00f2fe;
-      box-shadow: 0 0 8px #00f2fe, 0 0 15px #4facfe;
-      background: rgba(255,255,255,0.15);
+      border-color: #4fa3f7;
+      box-shadow: 0 0 8px rgba(79,163,247,0.6);
+      background: rgba(255,255,255,0.2);
     }
 
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      color: #000;
+      background: linear-gradient(135deg, #4fa3f7, #80d0ff);
+      color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1.1em;
       font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 0 15px rgba(0,242,254,0.5);
+      text-transform: uppercase;
     }
 
     .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0,242,254,0.8), 0 0 40px rgba(79,172,254,0.6);
+      opacity: 0.95;
+      box-shadow: 0 8px 20px rgba(79,163,247,0.5);
     }
 
     .link-wrapper {
@@ -131,22 +136,28 @@
       display: inline-block;
       padding: 10px 18px;
       background: none;
-      color: #00f2fe;
+      color: #80d0ff;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 500;
       transition: 0.3s;
-      border: 1px solid #00f2fe;
+      border: 1px solid #80d0ff;
     }
 
     .btn-link:hover {
-      background: #00f2fe;
+      background: #80d0ff;
       color: #000;
-      box-shadow: 0 0 12px #00f2fe;
+      box-shadow: 0 0 12px #80d0ff;
     }
   </style>
 </head>
 <body>
+  <!-- Background circles -->
+  <ul class="circles">
+    <li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li>
+  </ul>
+
   <div class="form-container">
     <h1>Create User</h1>
     <form id="user-form" action="<?=site_url('users/create/')?>" method="POST">
