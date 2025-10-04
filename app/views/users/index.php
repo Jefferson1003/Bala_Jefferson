@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Students Info</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     * {
       font-family: "Poppins", sans-serif;
@@ -89,8 +88,8 @@
       font-weight: 600;
       transition: 0.3s;
       box-shadow: 0 4px 12px rgba(255,65,108,0.4);
+      cursor: pointer;
     }
-
     .logout-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(255,65,108,0.6);
@@ -158,22 +157,18 @@
       transition: 0.3s;
       display: inline-block;
     }
-
     a.btn-update {
       background: linear-gradient(90deg, #4fa3f7, #80d0ff);
       box-shadow: 0 3px 8px rgba(79,163,247,0.4);
     }
-
     a.btn-update:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 14px rgba(79,163,247,0.6);
     }
-
     a.btn-delete {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       box-shadow: 0 3px 8px rgba(255,65,108,0.4);
     }
-
     a.btn-delete:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 14px rgba(255,65,108,0.6);
@@ -192,7 +187,6 @@
       margin-top: 25px;
       box-shadow: 0 5px 15px rgba(79,163,247,0.5);
     }
-
     .btn-create:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(79,163,247,0.7);
@@ -204,7 +198,6 @@
       gap: 10px;
       margin-bottom: 20px;
     }
-
     .search-form input {
       flex: 1;
       border-radius: 8px;
@@ -214,13 +207,11 @@
       color: #fff;
       transition: 0.2s;
     }
-
     .search-form input:focus {
       border: 1px solid #4fa3f7;
       box-shadow: 0 0 8px rgba(79,163,247,0.6);
       background: rgba(255,255,255,0.2);
     }
-
     .search-form button {
       background: #4fa3f7;
       border: none;
@@ -230,14 +221,64 @@
       padding: 8px 16px;
       transition: 0.2s;
     }
-
     .search-form button:hover {
       background: #3a8de0;
+    }
+
+    /* MODAL STYLES */
+    .modal-custom {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .modal-content-custom {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,242,254,0.4), 0 0 45px rgba(79,172,254,0.3);
+      color: #fff;
+    }
+    .modal-content-custom h3 {
+      margin-bottom: 25px;
+      color: #00f2fe;
+    }
+    .modal-content-custom button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+    .modal-yes {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(255,65,108,0.6);
+    }
+    .modal-no {
+      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(79,163,247,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <!-- Animated Background Bubbles -->
   <div class="bubbles">
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
@@ -248,10 +289,7 @@
       <h2>
         <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
       </h2>
-      <!-- Logout with confirmation -->
-      <a href="<?=site_url('auth/logout');?>" onclick="return confirm('Are you sure you want to logout?');">
-        <button class="logout-btn">Logout</button>
-      </a>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
     </div>
 
     <?php if(!empty($logged_in_user)): ?>
@@ -309,5 +347,40 @@
 
     <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
   </div>
+
+  <!-- LOGOUT MODAL -->
+  <div id="logoutModal" class="modal-custom">
+    <div class="modal-content-custom">
+      <h3>Are you sure you want to logout?</h3>
+      <button class="modal-yes" id="confirmLogout">Yes</button>
+      <button class="modal-no" id="cancelLogout">No</button>
+    </div>
+  </div>
+
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
+
+    logoutBtn.addEventListener('click', () => {
+      logoutModal.style.display = 'block';
+    });
+
+    cancelLogout.addEventListener('click', () => {
+      logoutModal.style.display = 'none';
+    });
+
+    confirmLogout.addEventListener('click', () => {
+      window.location.href = "<?=site_url('auth/logout');?>";
+    });
+
+    // Close modal on outside click
+    window.addEventListener('click', (e) => {
+      if(e.target === logoutModal){
+        logoutModal.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
