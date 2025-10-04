@@ -22,16 +22,22 @@
       margin: auto;
     }
 
+    /* HEADER */
     .dashboard-header {
+      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      color: #fff;
+      padding: 18px 25px;
+      border-radius: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       margin-bottom: 30px;
     }
 
     .dashboard-header h2 {
       font-weight: 700;
-      color: #333;
+      margin: 0;
     }
 
     .logout-btn {
@@ -42,31 +48,42 @@
       color: #fff;
       font-weight: 600;
       transition: 0.3s;
+      box-shadow: 0 4px 12px rgba(255,65,108,0.4);
     }
     .logout-btn:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,65,108,0.6);
     }
 
+    /* STATUS BAR */
     .user-status {
       padding: 12px 18px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 14px;
-      background: rgba(79, 163, 247, 0.1);
-      border: 1px solid rgba(79, 163, 247, 0.4);
+      background: #fff;
+      border-left: 5px solid #4fa3f7;
       color: #333;
       margin-bottom: 20px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
     }
     .user-status.error {
-      background: rgba(255, 65, 108, 0.1);
-      border: 1px solid rgba(255, 65, 108, 0.4);
+      border-left: 5px solid #ff416c;
       color: #ff416c;
+      background: #fff;
     }
 
+    /* TABLE CARD */
     .table-card {
       background: #fff;
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    table {
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     th {
@@ -75,15 +92,24 @@
       font-size: 14px;
       text-transform: uppercase;
       text-align: center;
+      padding: 12px;
     }
 
     td {
-      background: #f9f9f9;
+      background: #fdfdfd;
       border-bottom: 1px solid #eee;
       color: #333;
       text-align: center;
+      vertical-align: middle;
+      padding: 12px;
+      transition: 0.2s;
     }
 
+    tr:hover td {
+      background: #f1f7ff;
+    }
+
+    /* BUTTONS */
     a.btn-action {
       padding: 6px 14px;
       border-radius: 6px;
@@ -93,20 +119,25 @@
       color: #fff;
       font-weight: 500;
       transition: 0.3s;
+      display: inline-block;
     }
 
     a.btn-update {
       background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      box-shadow: 0 3px 8px rgba(79,163,247,0.4);
     }
     a.btn-update:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(79,163,247,0.6);
     }
 
     a.btn-delete {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      box-shadow: 0 3px 8px rgba(255,65,108,0.4);
     }
     a.btn-delete:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(255,65,108,0.6);
     }
 
     .btn-create {
@@ -116,31 +147,43 @@
       background: linear-gradient(90deg, #4fa3f7, #80d0ff);
       color: #fff;
       font-size: 1.1em;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       transition: 0.3s;
-      margin-top: 20px;
+      margin-top: 25px;
+      box-shadow: 0 5px 15px rgba(79,163,247,0.5);
     }
     .btn-create:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79,163,247,0.7);
     }
 
+    /* PAGINATION */
     .pagination-container {
       display: flex;
       justify-content: center;
       margin-top: 20px;
     }
 
+    /* SEARCH */
+    .search-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
     .search-form input {
+      flex: 1;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      background: #fff;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 10px 15px;
       color: #333;
+      transition: 0.2s;
     }
     .search-form input:focus {
-      outline: none;
       border: 1px solid #4fa3f7;
-      box-shadow: 0 0 10px rgba(79, 163, 247, 0.4);
+      box-shadow: 0 0 8px rgba(79,163,247,0.4);
       background: #fff;
     }
 
@@ -151,9 +194,10 @@
       font-weight: 600;
       border-radius: 8px;
       padding: 8px 16px;
+      transition: 0.2s;
     }
     .search-form button:hover {
-      opacity: 0.9;
+      background: #3a8de0;
     }
   </style>
 </head>
@@ -179,9 +223,9 @@
 
     <!-- Search + Table -->
     <div class="table-card">
-      <form action="<?=site_url('users');?>" method="get" class="d-flex mb-3 search-form">
+      <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-        <input name="q" type="text" class="form-control me-2" placeholder="Search" value="<?=html_escape($q);?>">
+        <input name="q" type="text" class="form-control" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit">Search</button>
       </form>
 
