@@ -19,11 +19,12 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: #0f0f1a;
+      background: linear-gradient(135deg, #80d0ff, #4fa3f7);
       overflow: hidden;
+      position: relative;
     }
 
-    /* Animated background circles */
+    /* Background circles para pareho sa login */
     .circles {
       position: absolute;
       width: 100%;
@@ -38,7 +39,7 @@
       list-style: none;
       width: 25px;
       height: 25px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       animation: animate 20s linear infinite;
       bottom: -150px;
       border-radius: 50%;
@@ -56,30 +57,27 @@
     .circles li:nth-child(10){ left: 85%; width: 150px; height: 150px; animation-duration: 30s; }
 
     @keyframes animate {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
-      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
     }
 
-    /* Register Card (same as Login Card style) */
+    /* Register Card - same design as Login */
     .register {
       position: relative;
       width: 420px;
       padding: 40px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #fff;
       border-radius: 20px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       z-index: 1;
+      text-align: center;
     }
 
     .register h2 {
-      text-align: center;
       font-size: 2em;
       font-weight: 600;
       margin-bottom: 25px;
-      color: #00e5ff;
-      text-shadow: 0 0 10px #00e5ff;
+      color: #333;
     }
 
     .inputBox {
@@ -92,15 +90,22 @@
       width: 100%;
       padding: 14px 45px 14px 15px;
       font-size: 1em;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      outline: none;
+      color: #333;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
       border-radius: 10px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .inputBox input:focus,
+    .inputBox select:focus {
+      border-color: #4fa3f7;
+      background: #fff;
     }
 
     .inputBox input::placeholder {
-      color: #bbb;
+      color: #aaa;
     }
 
     .toggle-password {
@@ -110,15 +115,15 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #00e5ff;
+      color: #666;
     }
 
     .register button {
       width: 100%;
       padding: 14px;
       border: none;
-      background: linear-gradient(90deg, #00e5ff, #00ffa3);
-      color: #0f0f1a;
+      background: linear-gradient(90deg, #4fa3f7, #80d0ff);
+      color: #fff;
       font-size: 1.1em;
       font-weight: 600;
       border-radius: 10px;
@@ -128,18 +133,18 @@
     }
 
     .register button:hover {
-      opacity: 0.8;
-      box-shadow: 0 0 15px #00ffa3;
+      opacity: 0.9;
     }
 
     .group {
       text-align: center;
       margin-top: 15px;
+      font-size: 0.95em;
+      color: #555;
     }
 
     .group a {
-      font-size: 0.95em;
-      color: #00e5ff;
+      color: #4fa3f7;
       text-decoration: none;
     }
 
