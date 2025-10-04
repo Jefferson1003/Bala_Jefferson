@@ -19,7 +19,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #66a6ff, #89f7fe); /* sky blue gradient */
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* deep sky blue */
       overflow: hidden;
     }
 
@@ -38,7 +38,7 @@
       bottom: -150px;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       border-radius: 50%;
       animation: rise 20s infinite ease-in;
     }
@@ -52,8 +52,8 @@
     .bubbles span:nth-child(8){ left:90%; width:70px; height:70px; animation-duration:26s;}
 
     @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 0.6; }
-      50% { opacity: 0.9; }
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { opacity: 0.8; }
       100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
     }
 
@@ -62,10 +62,10 @@
       position: relative;
       width: 380px;
       padding: 45px 35px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(15px);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       z-index: 1;
       animation: slideUp 0.7s ease-in-out;
     }
@@ -81,7 +81,7 @@
       font-weight: 700;
       margin-bottom: 25px;
       color: #fff;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
     .inputBox {
@@ -93,8 +93,8 @@
       width: 100%;
       padding: 14px 50px 14px 15px;
       font-size: 1em;
-      color: #333;
-      background: rgba(255,255,255,0.85);
+      color: #fff;
+      background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.3);
       outline: none;
       border-radius: 12px;
@@ -104,7 +104,11 @@
     .inputBox input:focus {
       border: 1px solid #4fa3f7;
       box-shadow: 0 0 8px rgba(79,163,247,0.7);
-      background: #fff;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .inputBox input::placeholder {
+      color: rgba(255,255,255,0.7);
     }
 
     .toggle-password {
@@ -114,7 +118,7 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #666;
+      color: #ccc;
       transition: 0.3s;
     }
 
@@ -149,7 +153,7 @@
 
     .group a {
       font-size: 0.95em;
-      color: #fff;
+      color: #80d0ff;
       text-decoration: none;
       font-weight: 500;
     }
